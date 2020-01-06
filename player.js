@@ -65,8 +65,24 @@ function Player( sprites ){
             this.vel.x+=moveSpeed;
             this.dir=1;
         }
-
-        if(controller.up || controller.down || controller.right || controller.left ){
+        if (controller.touch)
+        {
+            var mouse_pos = createVector(mouseX, mouseY);
+            var dir = mouse_pos.sub(this.pos).setMag(2);
+            this.pos.add(mouse_pos);
+            var angleY = degrees( dir.angleBetween(createVector(0,-1)));
+            var angleX = degrees(dir.angleBetween(createVector(1,0)));
+            //console.log(angleX);
+            if (angleY < 45)
+                this.dir = 2;
+            else if (angleY > 135)
+                this.dir = 0;
+            else if (angleX < 45)
+                this.dir = 1; 
+            else if (angleX > 135)
+                this.dir = 3;   
+        }
+        if(controller.up || controller.down || controller.right || controller.left || controller.touch){
             this.isMoving=true;             //set isMoving to true if a movement key is pressed 
         }else{
             this.isMoving=false;            //set it to false otherwise

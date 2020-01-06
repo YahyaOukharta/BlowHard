@@ -3,6 +3,7 @@ function Controller(){
     this.down=false;
     this.right=false;
     this.left=false;
+    this.touch=false;
 }
 function keyPressed(){   //set key state to true if pressed ...
     if(keyCode==UP_ARROW || key =="Z"){
@@ -31,4 +32,13 @@ function keyReleased(){     //..set key state back to false if released ...
     if(keyCode==LEFT_ARROW || key =="Q"){
         controller.left=false;
     }
+}
+
+function touchStarted()
+{
+    controller.touch = true;
+}
+function touchEnded()
+{
+    controller.touch = false;
 }
